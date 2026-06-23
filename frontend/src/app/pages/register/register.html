@@ -1,0 +1,93 @@
+<div class="register-wrapper">
+  <div class="register-card">
+    <div class="register-header">
+      <i class="bi bi-person-plus-fill brand-icon"></i>
+      <h1>Crear cuenta</h1>
+      <p>Completá tus datos</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="form-row">
+        <div class="field-group">
+          <label>Nombre</label>
+          <input type="text" formControlName="nombre" placeholder="Nombre" />
+          @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
+            <span class="field-error">Requerido</span>
+          }
+        </div>
+        <div class="field-group">
+          <label>Apellido</label>
+          <input type="text" formControlName="apellido" placeholder="Apellido" />
+          @if (form.get('apellido')?.invalid && form.get('apellido')?.touched) {
+            <span class="field-error">Requerido</span>
+          }
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Email</label>
+        <input type="email" formControlName="email" placeholder="tu@email.com" />
+        @if (form.get('email')?.invalid && form.get('email')?.touched) {
+          <span class="field-error">Email inválido</span>
+        }
+      </div>
+
+      <div class="field-group">
+        <label>Nombre de usuario</label>
+        <input type="text" formControlName="username" placeholder="@usuario" />
+        @if (form.get('username')?.invalid && form.get('username')?.touched) {
+          <span class="field-error">Mínimo 3 caracteres</span>
+        }
+      </div>
+
+      <div class="form-row">
+        <div class="field-group">
+          <label>Contraseña</label>
+          <input type="password" formControlName="password" placeholder="Mín. 8 caracteres" />
+          @if (form.get('password')?.invalid && form.get('password')?.touched) {
+            <span class="field-error">Mín. 8 caracteres, 1 mayúscula y 1 número</span>
+          }
+        </div>
+        <div class="field-group">
+          <label>Repetir contraseña</label>
+          <input type="password" formControlName="repeatPassword" placeholder="Repetí tu contraseña" />
+          @if (form.hasError('mismatch') && form.get('repeatPassword')?.touched) {
+            <span class="field-error">Las contraseñas no coinciden</span>
+          }
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Fecha de nacimiento</label>
+        <input type="date" formControlName="fechaNacimiento" />
+        @if (form.get('fechaNacimiento')?.invalid && form.get('fechaNacimiento')?.touched) {
+          <span class="field-error">Requerido</span>
+        }
+      </div>
+
+      <div class="field-group">
+        <label>Descripción</label>
+        <textarea formControlName="descripcion" placeholder="Una breve descripcion" rows="2"></textarea>
+      </div>
+
+      <div class="field-group">
+        <label>Foto de perfil</label>
+        <label class="file-upload" [class.has-file]="selectedFileName">
+          <i class="bi bi-cloud-upload"></i>
+          {{ selectedFileName || 'Seleccionar imagen' }}
+          <input type="file" accept="image/*" (change)="onFileChange($event)" hidden />
+        </label>
+      </div>
+
+      <button type="submit" class="btn-primary" [disabled]="loading">
+        @if (loading) { <span class="spinner"></span> } @else { Crear cuenta }
+      </button>
+    </form>
+
+    <p class="redirect-text">
+      ¿Ya tenés cuenta? <a routerLink="/login">Iniciá sesión</a>
+    </p>
+  </div>
+</div>
+
+<app-modal [visible]="modal.visible" [message]="modal.message" [type]="modal.type" />
