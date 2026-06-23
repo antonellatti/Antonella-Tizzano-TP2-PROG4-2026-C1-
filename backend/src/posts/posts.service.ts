@@ -26,14 +26,14 @@ export class PostsService {
       });
       imagen = result.secure_url;
     }
-
+  
     const post = await this.postModel.create({
       ...dto,
       imagen,
       autor: new Types.ObjectId(userId),
     });
-
-    return post.populate('autor', '-password');
+  
+    return this.postModel.findById(post._id).populate('autor', '-password');
   }
 
   async findAll(query: {

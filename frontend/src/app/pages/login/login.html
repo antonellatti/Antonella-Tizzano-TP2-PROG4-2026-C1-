@@ -1,0 +1,44 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <div class="login-header">
+      <i class="bi bi-bluesky"></i>
+      <h1>Antigram</h1>
+      <br>
+      <p>Log in</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="field-group">
+        <label>Email</label>
+        <div class="input-wrap">
+          <i class="bi bi-envelope"></i>
+          <input type="email" formControlName="email" placeholder="@email.com" />
+        </div>
+        @if (form.get('email')?.invalid && form.get('email')?.touched) {
+          <span class="field-error">Ingresá un email válido</span>
+        }
+      </div>
+
+      <div class="field-group">
+        <label>Password</label>
+        <div class="input-wrap">
+          <i class="bi bi-lock"></i>
+          <input type="password" formControlName="password" placeholder="******" />
+        </div>
+        @if (form.get('password')?.invalid && form.get('password')?.touched) {
+          <span class="field-error">Mínimo 8 caracteres</span>
+        }
+      </div>
+
+      <button type="submit" class="btn-primary" [disabled]="loading">
+        @if (loading) { <span class="spinner"></span> } @else { Ingresar }
+      </button>
+    </form>
+
+    <p class="redirect-text">
+      ¿No tenés cuenta? <a routerLink="/register">Registrate</a>
+    </p>
+  </div>
+</div>
+
+<app-modal [visible]="modal.visible" [message]="modal.message" [type]="modal.type" />

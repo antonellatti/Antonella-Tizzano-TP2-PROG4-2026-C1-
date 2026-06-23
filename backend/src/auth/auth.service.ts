@@ -55,6 +55,11 @@ export class AuthService {
     const user = await this.usersService.findByEmail(dto.email);
     if (!user) throw new UnauthorizedException('Credenciales inválidas');
 
+    // LOGS TEMPORALES
+    console.log('Password ingresada:', dto.password);
+    console.log('Password en DB:', user.password);
+    console.log('¿Empieza con $2b?:', user.password?.startsWith('$2b'));
+
     const passwordMatch = await bcrypt.compare(dto.password, user.password);
     if (!passwordMatch) throw new UnauthorizedException('Credenciales inválidas');
 

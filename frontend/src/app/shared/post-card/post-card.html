@@ -1,0 +1,35 @@
+<div class="post-card">
+  <div class="post-header">
+    <div class="autor-info">
+      @if (post.autor?.fotoPerfil) {
+        <img [src]="post.autor.fotoPerfil" class="autor-avatar" alt="avatar" />
+      } @else {
+        <div class="autor-avatar-placeholder"><i class="bi bi-person-fill"></i></div>
+      }
+      <div>
+        <span class="autor-username">@{{ post.autor?.username }}</span>
+      </div>
+    </div>
+    <span class="post-fecha">{{ post.createdAt | date:'dd/MM/yyyy' }}</span>
+  </div>
+
+  <h3 class="post-titulo">{{ post.titulo }}</h3>
+  <p class="post-descripcion">{{ post.descripcion }}</p>
+
+  @if (post.imagen) {
+    <img [src]="post.imagen" class="post-imagen" alt="imagen de publicación" />
+  }
+
+  <div class="post-actions">
+    <button class="btn-like" [class.liked]="yaLiked" (click)="toggleLike()">
+      <i class="bi" [class.bi-heart-fill]="yaLiked" [class.bi-heart]="!yaLiked"></i>
+      {{ post.likes?.length || 0 }}
+    </button>
+
+    @if (esAutor) {
+      <button class="btn-delete" (click)="eliminar()">
+        <i class="bi bi-trash3"></i>
+      </button>
+    }
+  </div>
+</div>

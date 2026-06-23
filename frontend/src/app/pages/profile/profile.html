@@ -1,0 +1,42 @@
+<div class="perfil-wrapper">
+  <nav class="navbar">
+    <span class="nav-brand"><i class="bi bi-bluesky"></i> Antigram</span>
+    <div class="nav-links">
+      <a (click)="router.navigate(['/posts'])"><i class="bi bi-house-heart"></i></a>
+      <button (click)="auth.logout()"><i class="bi bi-escape"></i></button>
+    </div>
+  </nav>
+
+  <div class="perfil-container">
+    <div class="perfil-card">
+      <div class="avatar-wrap">
+        @if (user?.fotoPerfil) {
+          <img [src]="user.fotoPerfil" alt="Foto de perfil" class="avatar" />
+        } @else {
+          <div class="avatar-placeholder"><i class="bi bi-person-fill"></i></div>
+        }
+      </div>
+      <h2>{{ user?.nombre }} {{ user?.apellido }}</h2>
+      <p class="username">@{{ user?.username }}</p>
+      <p class="descripcion">{{ user?.descripcion || 'Sin descripción' }}</p>
+      <!-- <div class="info-grid">
+        <div class="info-item"><i class="bi bi-envelope"></i> {{ user?.email }}</div>
+        <div class="info-item">
+          <i class="bi bi-calendar"></i> {{ user?.fechaNacimiento | date: 'dd/MM/yyyy' }}
+        </div>
+        <div class="info-item"><i class="bi bi-shield"></i> {{ user?.rol }}</div>
+      </div> -->
+    </div>
+
+    <div class="mis-posts">
+      <h3><i class="bi bi-postcard-heart"></i> Posts</h3>
+      @if (misPosts.length === 0) {
+        <p class="empty">Todavia no hay publicaciones.</p>
+      } @else {
+        @for (post of misPosts; track post._id) {
+          <app-post-card [post]="post" (deleted)="onDeleted($event)" (liked)="onLiked($event)" />
+        }
+      }
+    </div>
+  </div>
+</div>

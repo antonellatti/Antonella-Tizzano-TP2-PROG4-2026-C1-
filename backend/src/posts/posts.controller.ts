@@ -33,6 +33,11 @@ export class PostsController {
     return this.postsService.findAll({ orden, autorId, offset, limit });
   }
 
+  @Get('mis-posts')
+  misPosts(@Request() req: any) {
+    return this.postsService.findByUser(req.user.userId, 3);
+  }
+
   @Delete(':id')
   @HttpCode(200)
   delete(@Param('id') id: string, @Request() req: any) {
@@ -49,10 +54,5 @@ export class PostsController {
   @HttpCode(200)
   removeLike(@Param('id') id: string, @Request() req: any) {
     return this.postsService.toggleLike(id, req.user.userId, 'remove');
-  }
-
-  @Get('mis-posts')
-  misPosts(@Request() req: any) {
-    return this.postsService.findByUser(req.user.userId, 3);
   }
 }
