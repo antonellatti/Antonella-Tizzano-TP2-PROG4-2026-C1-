@@ -3,7 +3,8 @@
     <div class="login-header">
       <i class="bi bi-bluesky"></i>
       <h1>Antigram</h1>
-      <p>Iniciá sesión para continuar</p>
+      <br>
+      <p>Log in</p>
     </div>
 
     <form [formGroup]="form" (ngSubmit)="submit()">
@@ -11,7 +12,7 @@
         <label>Email</label>
         <div class="input-wrap">
           <i class="bi bi-envelope"></i>
-          <input type="email" formControlName="email" placeholder="tu@email.com" />
+          <input type="email" formControlName="email" placeholder="@email.com" />
         </div>
         @if (form.get('email')?.invalid && form.get('email')?.touched) {
           <span class="field-error">Ingresá un email válido</span>
@@ -19,10 +20,10 @@
       </div>
 
       <div class="field-group">
-        <label>Contraseña</label>
+        <label>Password</label>
         <div class="input-wrap">
           <i class="bi bi-lock"></i>
-          <input type="password" formControlName="password" placeholder="Tu contraseña" />
+          <input type="password" formControlName="password" placeholder="******" />
         </div>
         @if (form.get('password')?.invalid && form.get('password')?.touched) {
           <span class="field-error">Mínimo 8 caracteres</span>

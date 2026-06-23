@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -18,6 +18,7 @@ export class Posts implements OnInit {
   auth = inject(AuthService);
   router = inject(Router);
   postsService = inject(PostsService);
+  cdr = inject(ChangeDetectorRef);
 
   posts: any[] = [];
   total = 0;
@@ -28,7 +29,6 @@ export class Posts implements OnInit {
 
   modal = { visible: false, message: '', type: 'info' as 'success' | 'error' | 'info' };
 
-  // Nuevo post
   nuevoPost = { titulo: '', descripcion: '' };
   postFile: File | null = null;
   postFileName = '';
@@ -39,8 +39,17 @@ export class Posts implements OnInit {
   cargarPosts() {
     this.loading = true;
     this.postsService.getPosts({ orden: this.orden, offset: this.offset, limit: this.limit }).subscribe({
-      next: (res) => { this.posts = res.posts; this.total = res.total; this.loading = false; },
-      error: () => { this.loading = false; }
+      next: (res: any) => {
+        this.posts = res.posts;
+        this.total = Number(res.total);
+        this.loading = false;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.log('Error cargando posts:', err);
+        this.loading = false;
+        this.cdr.detectChanges();
+      }
     });
   }
 
@@ -48,6 +57,7 @@ export class Posts implements OnInit {
     this.orden = orden;
     this.offset = 0;
     this.cargarPosts();
+    this.cdr.detectChanges();
   }
 
   paginaAnterior() {
@@ -75,7 +85,8 @@ export class Posts implements OnInit {
     if (this.postFile) fd.append('imagen', this.postFile);
 
     this.postsService.createPost(fd).subscribe({
-      next: () => {
+      next: (res) => {
+        console.log('Post creado:', res);
         this.nuevoPost = { titulo: '', descripcion: '' };
         this.postFile = null;
         this.postFileName = '';
@@ -83,17 +94,22 @@ export class Posts implements OnInit {
         this.offset = 0;
         this.cargarPosts();
       },
-      error: () => { this.creando = false; }
+      error: (err) => {
+        this.creando = false;
+        this.cdr.detectChanges();
+      }
     });
   }
 
   onDeleted(id: string) {
     this.posts = this.posts.filter(p => p._id !== id);
     this.total--;
+    this.cdr.detectChanges();
   }
 
   onLiked(updatedPost: any) {
     const idx = this.posts.findIndex(p => p._id === updatedPost._id);
     if (idx !== -1) this.posts[idx] = updatedPost;
+    this.cdr.detectChanges();
   }
 }

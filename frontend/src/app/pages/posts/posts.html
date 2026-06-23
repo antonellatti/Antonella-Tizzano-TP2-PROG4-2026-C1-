@@ -2,8 +2,8 @@
   <nav class="navbar">
     <span class="nav-brand"><i class="bi bi-bluesky"></i> Antigram</span>
     <div class="nav-links">
-      <a (click)="router.navigate(['/profile'])">Perfil <i class="bi bi-person-heart"></i></a>
-      <button (click)="auth.logout()">Salir <i class="bi bi-escape"></i></button>
+      <a (click)="router.navigate(['/profile'])"><i class="bi bi-person-heart"></i></a>
+      <button (click)="auth.logout()"><i class="bi bi-escape"></i></button>
     </div>
   </nav>
 
@@ -11,16 +11,16 @@
 
     <!-- Crear publicación -->
     <div class="crear-post">
-      <h3><i class="bi bi-pencil-square"></i> Nueva publicación</h3>
-      <input type="text" [(ngModel)]="nuevoPost.titulo" placeholder="Título" class="input-field" />
-      <textarea [(ngModel)]="nuevoPost.descripcion" placeholder="¿Qué estás pensando?" rows="3" class="input-field"></textarea>
+      <h3><i class="bi bi-patch-plus"></i> New Post</h3>
+      <input type="text" [(ngModel)]="nuevoPost.titulo" placeholder="Title" class="input-field" />
+      <textarea [(ngModel)]="nuevoPost.descripcion" placeholder="Comments" rows="3" class="input-field"></textarea>
       <div class="crear-footer">
         <label class="file-btn">
-          <i class="bi bi-image"></i> {{ postFileName || 'Agregar imagen' }}
+          <i class="bi bi-postage-heart"></i> {{ postFileName || 'Add' }}
           <input type="file" accept="image/*" (change)="onPostFile($event)" hidden />
         </label>
         <button class="btn-publicar" (click)="crearPost()" [disabled]="creando || !nuevoPost.titulo || !nuevoPost.descripcion">
-          @if (creando) { <span class="spinner"></span> } @else { Publicar }
+          @if (creando) { <span class="spinner"></span> } @else { Post } <i class="bi bi-cloud-arrow-up"></i>
         </button>
       </div>
     </div>
@@ -29,34 +29,34 @@
     <div class="toolbar">
       <div class="orden-btns">
         <button [class.active]="orden === 'fecha'" (click)="cambiarOrden('fecha')">
-          <i class="bi bi-calendar"></i> Más recientes
+          <i class="bi bi-calendar-heart"></i> By date
         </button>
         <button [class.active]="orden === 'likes'" (click)="cambiarOrden('likes')">
-          <i class="bi bi-heart"></i> Más populares
+          <i class="bi bi-emoji-heart-eyes"></i> By loved
         </button>
       </div>
       <span class="paginacion-info">{{ paginaActual }} / {{ totalPaginas }}</span>
     </div>
 
-    <!-- Lista de posts -->
+    <!-- posts lista -->
     @if (loading) {
-      <div class="loading"><span class="spinner-dark"></span> Cargando...</div>
+      <div class="loading"><span class="spinner-dark"></span> loading...</div>
     } @else {
       @for (post of posts; track post._id) {
         <app-post-card [post]="post" (deleted)="onDeleted($event)" (liked)="onLiked($event)" />
       }
       @if (posts.length === 0) {
-        <div class="empty">No hay publicaciones todavía. ¡Sé el primero!</div>
+        <div class="empty">Nothing yet <i class="ti ti-file-sad"></i></div>
       }
     }
 
     <!-- Paginación -->
     <div class="paginacion">
       <button (click)="paginaAnterior()" [disabled]="offset === 0">
-        <i class="bi bi-chevron-left"></i> Anterior
+        <i class="bi bi-chevron-left"></i>
       </button>
       <button (click)="paginaSiguiente()" [disabled]="offset + limit >= total">
-        Siguiente <i class="bi bi-chevron-right"></i>
+        <i class="bi bi-chevron-right"></i>
       </button>
     </div>
 

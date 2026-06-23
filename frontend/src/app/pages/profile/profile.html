@@ -2,8 +2,8 @@
   <nav class="navbar">
     <span class="nav-brand"><i class="bi bi-bluesky"></i> Antigram</span>
     <div class="nav-links">
-      <a (click)="router.navigate(['/posts'])">Home <i class="bi bi-house-heart"></i></a>
-      <button (click)="auth.logout()">Salir <i class="bi bi-escape"></i></button>
+      <a (click)="router.navigate(['/posts'])"><i class="bi bi-house-heart"></i></a>
+      <button (click)="auth.logout()"><i class="bi bi-escape"></i></button>
     </div>
   </nav>
 
@@ -19,13 +19,13 @@
       <h2>{{ user?.nombre }} {{ user?.apellido }}</h2>
       <p class="username">@{{ user?.username }}</p>
       <p class="descripcion">{{ user?.descripcion || 'Sin descripción' }}</p>
-      <div class="info-grid">
+      <!-- <div class="info-grid">
         <div class="info-item"><i class="bi bi-envelope"></i> {{ user?.email }}</div>
         <div class="info-item">
           <i class="bi bi-calendar"></i> {{ user?.fechaNacimiento | date: 'dd/MM/yyyy' }}
         </div>
         <div class="info-item"><i class="bi bi-shield"></i> {{ user?.rol }}</div>
-      </div>
+      </div> -->
     </div>
 
     <div class="mis-posts">

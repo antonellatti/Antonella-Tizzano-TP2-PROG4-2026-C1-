@@ -7,7 +7,6 @@
         <div class="autor-avatar-placeholder"><i class="bi bi-person-fill"></i></div>
       }
       <div>
-        <span class="autor-nombre">{{ post.autor?.nombre }} {{ post.autor?.apellido }}</span>
         <span class="autor-username">@{{ post.autor?.username }}</span>
       </div>
     </div>
@@ -29,7 +28,7 @@
 
     @if (esAutor) {
       <button class="btn-delete" (click)="eliminar()">
-        <i class="bi bi-trash"></i> Eliminar
+        <i class="bi bi-trash3"></i>
       </button>
     }
   </div>

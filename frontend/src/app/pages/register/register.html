@@ -1,12 +1,13 @@
 <div class="register-wrapper">
   <div class="register-card">
     <div class="register-header">
-      <i class="bi bi-person-plus-fill brand-icon"></i>
-      <h1>Crear cuenta</h1>
-      <p>Completá tus datos</p>
+      <i class="bi bi-bluesky"></i>
+      <h1>Antigram</h1>
+      <br>
+      <p>Register</p>
     </div>
 
-    <form [formGroup]="form" (ngSubmit)="submit()">
+    <form [formGroup]="form" autocomplete="one-time-code" (ngSubmit)="submit()">
       <div class="form-row">
         <div class="field-group">
           <label>Nombre</label>
@@ -70,11 +71,11 @@
         <textarea formControlName="descripcion" placeholder="Una breve descripcion" rows="2"></textarea>
       </div>
 
-      <div class="field-group">
+      <div class="field-group upload-file">
         <label>Foto de perfil</label>
         <label class="file-upload" [class.has-file]="selectedFileName">
-          <i class="bi bi-cloud-upload"></i>
-          {{ selectedFileName || 'Seleccionar imagen' }}
+          {{ selectedFileName || 'Seleccionar' }}
+          <i class="bi bi-cloud-arrow-up"></i>
           <input type="file" accept="image/*" (change)="onFileChange($event)" hidden />
         </label>
       </div>
