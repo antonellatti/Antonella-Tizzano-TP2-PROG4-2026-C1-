@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
 import { PostsService } from '../../core/services/posts.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-card',
@@ -17,6 +18,7 @@ export class PostCard {
 
   auth = inject(AuthService);
   postsService = inject(PostsService);
+  router = inject(Router);
 
   get currentUser() { return this.auth.getUser(); }
 

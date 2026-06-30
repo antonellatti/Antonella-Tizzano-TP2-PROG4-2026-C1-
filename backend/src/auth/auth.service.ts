@@ -69,4 +69,30 @@ export class AuthService {
     const { password, ...userData } = user.toObject();
     return { token, user: userData };
   }
+
+  async autorizar(token: string) {
+    try {
+      const payload = this.jwtService.verify(token);
+      const user = await this.usersService.findByEmail(payload.email);
+      if (!user) throw new UnauthorizedException('Usuario no encontrado');
+      const { password, ...userData } = user.toObject();
+      return userData;
+    } catch {
+      throw new UnauthorizedException('Token invalido o expirado');
+    }
+  }
+  
+  async refrescar(token: string) {
+    try {
+      const payload = this.jwtService.verify(token);
+      const newToken = this.jwtService.sign({
+        sub: payload.sub,
+        email: payload.email,
+        rol: payload.rol,
+      });
+      return { token: newToken };
+    } catch {
+      throw new UnauthorizedException('Token inválido o expirado');
+    }
+  }
 }
