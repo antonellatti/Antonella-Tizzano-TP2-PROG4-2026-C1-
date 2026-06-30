@@ -34,4 +34,19 @@ export class PostsService {
   getMisPosts() {
     return this.http.get<any[]>(`${this.apiUrl}/posts/mis-posts`);
   }
+
+  getComments(postId: string, offset = 0, limit = 5) {
+    return this.http.get<{ comments: any[]; total: number }>(
+      `${this.apiUrl}/posts/${postId}/comments?offset=${offset}&limit=${limit}`
+    );
+  }
+  
+  createComment(postId: string, mensaje: string) {
+    return this.http.post<any>(`${this.apiUrl}/posts/${postId}/comments`, { mensaje });
+  }
+  
+  updateComment(postId: string, commentId: string, mensaje: string) {
+    return this.http.put<any>(`${this.apiUrl}/posts/${postId}/comments/${commentId}`, { mensaje });
+  }
+  
 }

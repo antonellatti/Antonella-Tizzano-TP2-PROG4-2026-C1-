@@ -1,0 +1,331 @@
+.detail-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #d387ff 0%, #78c7ff 100%);
+}
+.navbar {
+  background: transparent;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-brand {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 
+  0 0 5px #db71ff, 
+  0 0 10px #f3d0ff, 
+  0 0 20px #f3d0ff, 
+  0 0 40px #fff, 
+  0 0 80px #fff;
+}
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.nav-links a {
+  color: #fff;
+  cursor: pointer;
+  padding: 0.4rem 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 25px;
+}
+.nav-links a:hover {
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+.nav-links button {
+  background: none;
+  color: #fff;
+  border: none !important;
+  padding: 0.4rem 1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.nav-links button:hover {
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+.detail-container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+.post-card {
+  background: transparent;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.4);
+  margin-bottom: 1.5rem;
+}
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.autor-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.autor-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.autor-avatar-placeholder {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+}
+.autor-username {
+  display: block;
+  font-weight: 700;
+  color: #fff;
+  font-size: 1rem;
+}
+.post-fecha {
+  color: #dcdcdc;
+  font-size: 0.82rem;
+}
+.post-titulo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+.post-descripcion {
+  color: #dcdcdc;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+.post-imagen {
+  width: 100%;
+  border-radius: 12px;
+  max-height: 450px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+.btn-like {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: none;
+  border-radius: 25px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  color: #dcdcdc;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+.btn-like:hover {
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+.btn-like.liked {
+  color: #e74c3c;
+  box-shadow: 0 1px 20px rgba(255, 255, 255, 0.3);
+}
+.btn-like.liked:hover {
+  color: #e74c3c;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+.comments-section {
+  background: transparent;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.4);
+}
+.comments-section h3 {
+  color: #dcdcdc;
+  margin-bottom: 1.25rem;
+}
+.nuevo-comentario {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+}
+.input-field {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  padding: 0.75rem 1rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  margin-bottom: 0.75rem;
+  box-sizing: border-box;
+  transition: border 0.2s;
+  resize: none;
+  color: white !important;
+}
+.input-field::placeholder{
+  color: #bdbdbd;
+}
+.input-field:focus {
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+}
+.btn-comentar {
+  margin-top: 0.5rem;
+  background: transparent;
+  align-items: flex-end;
+  color: #dcdcdc;
+  border: none;
+  border-radius: 25px;
+  padding: 0.4rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  gap: 0.5rem;
+  transition: background 0.2s;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+.btn-comentar:hover {
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+.btn-comentar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.comment-card {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+.comment-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.comment-avatar-placeholder {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #db71ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.9rem;
+}
+.comment-fecha {
+  display: block;
+  color: #dcdcdc;
+  font-size: 0.78rem;
+}
+.editado {
+  color: #dcdcdc;
+  font-size: 0.75rem;
+  font-style: italic;
+  margin-left: 0.4rem;
+}
+.comment-mensaje {
+  color: #dcdcdc;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin: 0;
+}
+.btn-editar {
+  background: none;
+  border: none;
+  color: #dcdcdc;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.2rem;
+}
+.edit-area {
+  margin-top: 0.5rem;
+}
+.edit-btns {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  justify-content: flex-end;
+}
+.btn-cancelar {
+  background: transparent;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  border: none;
+  color: #bdbdbd;
+  border-radius: 25px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn-cancelar:hover{
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+.btn-guardar {
+  background: transparent;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  border: none;
+  color: #bdbdbd;
+  border-radius: 25px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn-guardar{
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+.empty {
+  text-align: center;
+  color: #bdbdbd;
+  padding: 2rem;
+}
+.btn-cargar-mas {
+  display: block;
+  margin: 1rem auto 0;
+  background: transparent;
+  border: none;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  border-radius: 25px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+.btn-cargar-mas:hover {
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

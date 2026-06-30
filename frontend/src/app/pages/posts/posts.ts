@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -6,11 +6,14 @@ import { AuthService } from '../../core/services/auth.service';
 import { PostsService } from '../../core/services/posts.service';
 import { PostCard } from '../../shared/post-card/post-card';
 import { Modal } from '../../shared/modal/modal.component';
+import { SessionService } from '../../core/services/session.service';
+import { SessionModal } from '../../shared/session-modal/session-modal.component';
+
 
 @Component({
   selector: 'app-posts',
   standalone: true,
-  imports: [CommonModule, FormsModule, PostCard, Modal],
+  imports: [CommonModule, FormsModule, PostCard, Modal, SessionModal],
   templateUrl: 'posts.html',
   styleUrl: 'posts.css'
 })
@@ -19,6 +22,8 @@ export class Posts implements OnInit {
   router = inject(Router);
   postsService = inject(PostsService);
   cdr = inject(ChangeDetectorRef);
+  sessionService = inject(SessionService);
+  sessionModalVisible = false;
 
   posts: any[] = [];
   total = 0;
@@ -34,7 +39,11 @@ export class Posts implements OnInit {
   postFileName = '';
   creando = false;
 
-  ngOnInit() { this.cargarPosts(); }
+  ngOnInit() { this.cargarPosts(); 
+    this.sessionService.iniciarContador(
+    () => { this.sessionModalVisible = true; this.cdr.detectChanges(); },
+    (extender) => { this.sessionService.responderModal(extender); }
+  );}
 
   cargarPosts() {
     this.loading = true;
@@ -108,8 +117,12 @@ export class Posts implements OnInit {
   }
 
   onLiked(updatedPost: any) {
-    const idx = this.posts.findIndex(p => p._id === updatedPost._id);
-    if (idx !== -1) this.posts[idx] = updatedPost;
-    this.cdr.detectChanges();
+    this.cargarPosts();
   }
+
+  ngOnDestroy() {
+    this.sessionService.limpiarContadores();
+  }
+
+
 }

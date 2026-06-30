@@ -1,1 +1,6 @@
 <router-outlet />
+
+<app-session-modal
+  [visible]="sessionModalVisible"
+  (respuesta)="sessionService.responderModal($event); sessionModalVisible = false">
+</app-session-modal>

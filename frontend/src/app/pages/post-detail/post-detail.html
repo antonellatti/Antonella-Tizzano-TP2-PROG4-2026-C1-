@@ -1,0 +1,116 @@
+<div class="detail-wrapper">
+  <nav class="navbar">
+    <span class="nav-brand"><i class="bi bi-bluesky"></i> Antigram</span>
+    <div class="nav-links">
+      <a (click)="router.navigate(['/posts'])"><i class="bi bi-arrow-left-circle"></i></a>
+      <a (click)="router.navigate(['/profile'])"><i class="bi bi-person-heart"></i></a>
+      <button (click)="auth.logout()"><i class="bi bi-escape"></i></button>
+    </div>
+  </nav>
+
+
+  @if (post) {
+    <div class="detail-container">
+
+      <!-- Post -->
+      <div class="post-card">
+        <div class="post-header">
+          <div class="autor-info">
+            @if (post.autor?.fotoPerfil) {
+              <img [src]="post.autor.fotoPerfil" class="autor-avatar" />
+            } @else {
+              <div class="autor-avatar-placeholder"><i class="bi bi-person-fill"></i></div>
+            }
+            <div>
+              <span class="autor-username">@{{ post.autor?.username }}</span>
+            </div>
+          </div>
+          <span class="post-fecha">{{ post.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+        </div>
+
+        <h2 class="post-titulo">{{ post.titulo }}</h2>
+        <p class="post-descripcion">{{ post.descripcion }}</p>
+
+        @if (post.imagen) {
+          <img [src]="post.imagen" class="post-imagen" />
+        }
+
+        <div class="post-likes">
+          <button class="btn-like" [class.liked]="yaLiked" (click)="toggleLike()">
+            <i class="bi" [class.bi-heart-fill]="yaLiked" [class.bi-heart]="!yaLiked"></i>
+            {{ post.likes?.length || 0 }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Comentarios -->
+      <div class="comments-section">
+        <h3><i class="bi bi-chat-heart"></i> ({{ total }})</h3>
+
+        <!-- Nuevo comentario -->
+        <div class="nuevo-comentario">
+          <textarea
+            [(ngModel)]="nuevoComentario"
+            placeholder="tu comentario..."
+            rows="2"
+            class="input-field"
+            (keydown.enter)="$event.preventDefault(); enviarComentario()">
+          </textarea>
+          <button class="btn-comentar" (click)="enviarComentario()" [disabled]="enviando || !nuevoComentario.trim()">
+            @if (enviando) { <span class="spinner"></span> } @else { post <i class="bi bi-chat-heart-fill"></i> }
+          </button>
+        </div>
+
+        <!-- Lista de comentarios -->
+        @for (comment of comments; track comment._id) {
+          <div class="comment-card">
+            <div class="comment-header">
+              <div class="autor-info">
+                @if (comment.autor?.fotoPerfil) {
+                  <img [src]="comment.autor.fotoPerfil" class="comment-avatar" />
+                } @else {
+                  <div class="comment-avatar-placeholder"><i class="bi bi-person-fill"></i></div>
+                }
+                <div>
+                  <span class="autor-username">@{{ comment.autor?.username }}</span>
+                  <span class="comment-fecha">{{ comment.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+                  @if (comment.modificado) {
+                    <span class="editado">(editado)</span>
+                  }
+                </div>
+              </div>
+              @if (esAutorComentario(comment)) {
+                <button class="btn-editar" (click)="iniciarEdicion(comment)">
+                  <i class="bi bi-pencil"></i>
+                </button>
+              }
+            </div>
+
+            @if (editingCommentId === comment._id) {
+              <div class="edit-area">
+                <textarea [(ngModel)]="editingMensaje" rows="2" class="input-field"></textarea>
+                <div class="edit-btns">
+                  <button class="btn-cancelar" (click)="cancelarEdicion()">Cancelar</button>
+                  <button class="btn-guardar" (click)="guardarEdicion(comment)">Guardar</button>
+                </div>
+              </div>
+            } @else {
+              <p class="comment-mensaje">{{ comment.mensaje }}</p>
+            }
+          </div>
+        }
+
+        @if (comments.length === 0) {
+          <p class="empty">No comments yet</p>
+        }
+
+        @if (hayMas) {
+          <button class="btn-cargar-mas" (click)="cargarMas()">
+            <i class="bi bi-arrow-down-circle"></i> Cargar más comentarios
+          </button>
+        }
+      </div>
+
+    </div>
+  }
+</div>

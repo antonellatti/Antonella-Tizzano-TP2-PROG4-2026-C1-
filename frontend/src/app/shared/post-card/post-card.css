@@ -115,3 +115,20 @@
   color: #dc3545;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
 }
+.btn-detalle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border-radius: 25px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  color: #dcdcdc;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-detalle:hover {
+  color: #fff;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}

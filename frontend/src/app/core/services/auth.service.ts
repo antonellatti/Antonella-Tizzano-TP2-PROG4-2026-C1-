@@ -36,4 +36,12 @@ export class AuthService {
     const u = localStorage.getItem('user');
     return u ? JSON.parse(u) : null;
   }
+
+  autorizar() {
+    return this.http.post<any>(`${this.apiUrl}/auth/autorizar`, {});
+  }
+  
+  refrescarToken() {
+    return this.http.post<{ token: string }>(`${this.apiUrl}/auth/refrescar`, {});
+  }
 }

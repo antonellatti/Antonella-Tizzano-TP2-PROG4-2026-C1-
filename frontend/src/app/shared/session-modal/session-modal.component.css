@@ -1,0 +1,65 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+.modal-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, #d387ff 0%, #78c7ff 100%);  
+  border-radius: 20px;
+  padding: 2rem;
+  z-index: 1000;
+  text-align: center;
+  min-width: 320px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+.modal-icon {
+  font-size: 3rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+h3 {
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+p {
+  color: #dcdcdc;
+  margin-bottom: 1.5rem;
+}
+.modal-btns {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+.btn-cancelar {
+  background: #bd5661;
+  border: none;
+  color: #dcdcdc;
+  border-radius: 25px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn-cancelar:hover{
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.4);
+  background: #ff0000;
+  color: white;
+}
+.btn-extender {
+  background: #527ed5;
+  border: none;
+  color: #dcdcdc;
+  border-radius: 25px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn-extender:hover {
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.4);
+  background: #2956c5;
+  color: white;
+}

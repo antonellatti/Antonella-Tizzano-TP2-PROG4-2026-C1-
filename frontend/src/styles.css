@@ -1,15 +1,113 @@
-/* You can add global styles to this file, and also import other style files */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg,#d387ff,#78c7ff);
 }
+.navbar {
+  background: transparent;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-brand {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 
+  0 0 5px #db71ff, 
+  0 0 10px #f3d0ff, 
+  0 0 20px #f3d0ff, 
+  0 0 40px #fff, 
+  0 0 80px #fff;
+}
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.nav-links a {
+  color: #fff;
+  cursor: pointer;
+  padding: 0.4rem 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 25px;
+}
+.nav-links a:hover {
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+.nav-links button {
+  background: none;
+  color: #fff;
+  border: none !important;
+  padding: 0.4rem 1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.nav-links button:hover {
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+.btn-primary {
+  background: transparent;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.btn-primary:hover {
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+}
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.input-field {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  padding: 0.75rem 1rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  margin-bottom: 0.75rem;
+  box-sizing: border-box;
+  transition: border 0.2s;
+  resize: none;
+  color: white !important;
+}
+.input-field::placeholder{
+  color: #bdbdbd;
+}
+.input-field:focus {
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+
+
+/* Textos comunes */
+.text-muted { color: #888; }
+.empty { text-align: center; color: #aaa; padding: 2rem; }
+
+
 
 
 input:-webkit-autofill,
@@ -27,4 +125,9 @@ input:autofill:active {
     box-shadow: inset 0 0 0px 1000px rgba(255, 255, 255, 0.7) !important;
     -webkit-box-shadow: inset 0 0 0px 1000px rgba(255, 255, 255, 0.07) !important;
   }
+
+
+
+
+
 
