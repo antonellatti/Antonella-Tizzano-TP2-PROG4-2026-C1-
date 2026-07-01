@@ -158,7 +158,7 @@
   color: #fff;
 }
 .paginacion-info {
-  color: #888;
+  color: #fff;
   font-size: 0.85rem;
 }
 .loading {
@@ -180,6 +180,9 @@
   justify-content: center;
   gap: 1rem;
   margin-top: 1.5rem;
+}
+.paginacion span{
+  color: #fff;
 }
 .paginacion button {
   background: transparent;

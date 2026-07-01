@@ -3,6 +3,7 @@ import { FormBuilder, Validators, ReactiveFormsModule, AbstractControl } from '@
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { Modal } from '../../shared/modal/modal.component';
+import { PasswordToggleDirective } from '../../shared/directives/password-toggle.directive';
 
 function passwordMatch(control: AbstractControl) {
   const p = control.get('password')?.value;
@@ -13,7 +14,7 @@ function passwordMatch(control: AbstractControl) {
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, Modal],
+  imports: [ReactiveFormsModule, RouterLink, Modal, PasswordToggleDirective],
   templateUrl: 'register.html',
   styleUrl: 'register.css'
 })

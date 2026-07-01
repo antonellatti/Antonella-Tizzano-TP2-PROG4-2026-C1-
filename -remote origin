@@ -1,0 +1,7 @@
+* [33m97e34cf[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/sprint3[m[33m, [m[1;32msprint3[m[33m)[m Sprint N°3 - agregar y editar comentarios, timeout de login con pantalla modal
+* [33mf6c02d5[m[33m ([m[1;31morigin/sprint2[m[33m, [m[1;32msprint2[m[33m)[m Sprint N° 2 - agregar, eliminar, visualizar posts en la red social, añadiduras esteticas
+* [33mdddb82e[m[33m ([m[1;31morigin/sprint1[m[33m, [m[1;32msprint1[m[33m)[m fix: convertir frontend de submódulo a carpeta normal
+* [33mef75f97[m mas fix errores, tsconfig.app.json
+* [33m1aba386[m Reincorporar frontend correctamente en sprint 1
+* [33m9f1e4c7[m Agregar README y cambio en package.json
+* [33m2385694[m[33m ([m[1;31morigin/master[m[33m)[m Sprint N°1 - creacion del proyecto, font con Angular y back con nestJS

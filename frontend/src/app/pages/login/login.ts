@@ -3,11 +3,12 @@ import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { Modal } from '../../shared/modal/modal.component';
+import { PasswordToggleDirective } from '../../shared/directives/password-toggle.directive';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, Modal],
+  imports: [ReactiveFormsModule, RouterLink, Modal, PasswordToggleDirective],
   templateUrl: 'login.html',
   styleUrl: 'login.css'
 })

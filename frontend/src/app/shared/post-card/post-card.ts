@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
 import { PostsService } from '../../core/services/posts.service';
 import { Router } from '@angular/router';
+import { LikesCountPipe } from '../../shared/pipes/likes-count.pipe';
+import { TimeagoPipe } from '../../shared/pipes/timeago.pipe';
 
 @Component({
   selector: 'app-post-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LikesCountPipe, TimeagoPipe],
   templateUrl: 'post-card.html',
   styleUrl: 'post-card.css'
 })
@@ -28,6 +30,10 @@ export class PostCard {
 
   get esAutor(): boolean {
     return this.post.autor?._id === this.currentUser?._id;
+  }
+  
+  get esAdmin(): boolean {
+    return this.currentUser?.rol === 'administrador';
   }
 
   toggleLike() {

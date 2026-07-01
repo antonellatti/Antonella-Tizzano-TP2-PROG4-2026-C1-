@@ -22,8 +22,8 @@
       <div class="field-group">
         <label>Password</label>
         <div class="input-wrap">
-          <i class="bi bi-lock"></i>
-          <input type="password" formControlName="password" placeholder="******" />
+          <input type="password" formControlName="password" placeholder="******" 
+          formControlName="password" appPasswordToggle autocomplete=""/>
         </div>
         @if (form.get('password')?.invalid && form.get('password')?.touched) {
           <span class="field-error">Mínimo 8 caracteres</span>
