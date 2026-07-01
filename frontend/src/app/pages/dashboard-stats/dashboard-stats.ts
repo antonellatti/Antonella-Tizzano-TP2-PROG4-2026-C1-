@@ -6,13 +6,14 @@ import { PostsService } from '../../core/services/posts.service';
 import { Chart, registerables } from 'chart.js';
 import { AuthService } from '../../core/services/auth.service';
 import { HoverHighlightDirective } from '../../shared/directives/hover-highlight.directive';
+import { TooltipDirective } from '../../shared/directives/tooltip.directive';
 
 
 Chart.register(...registerables);
 @Component({
   selector: 'app-dashboard-stats',
   standalone: true,
-  imports: [CommonModule, FormsModule, HoverHighlightDirective],
+  imports: [CommonModule, FormsModule, HoverHighlightDirective, TooltipDirective],
   templateUrl: 'dashboard-stats.html',
   styleUrl: 'dashboard-stats.css'
 })

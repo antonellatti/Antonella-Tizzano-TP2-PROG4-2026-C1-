@@ -8,12 +8,13 @@ import { PostCard } from '../../shared/post-card/post-card';
 import { Modal } from '../../shared/modal/modal.component';
 import { SessionService } from '../../core/services/session.service';
 import { SessionModal } from '../../shared/session-modal/session-modal.component';
+import { TooltipDirective } from '../../shared/directives/tooltip.directive';
 
 
 @Component({
   selector: 'app-posts',
   standalone: true,
-  imports: [CommonModule, FormsModule, PostCard, Modal, SessionModal],
+  imports: [CommonModule, FormsModule, PostCard, Modal, SessionModal, TooltipDirective],
   templateUrl: 'posts.html',
   styleUrl: 'posts.css'
 })
