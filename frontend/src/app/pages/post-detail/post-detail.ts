@@ -6,11 +6,12 @@ import { AuthService } from '../../core/services/auth.service';
 import { PostsService } from '../../core/services/posts.service';
 import { PluralizePipe } from '../../shared/pipes/pluralize.pipe';
 import { LikesCountPipe } from '../../shared/pipes/likes-count.pipe';
+import { TooltipDirective } from '../../shared/directives/tooltip.directive';
 
 @Component({
   selector: 'app-post-detail',
   standalone: true,
-  imports: [CommonModule, FormsModule, PluralizePipe, LikesCountPipe],
+  imports: [CommonModule, FormsModule, PluralizePipe, LikesCountPipe, TooltipDirective],
   templateUrl: 'post-detail.html',
   styleUrl: 'post-detail.css'
 })

@@ -6,12 +6,13 @@ import { UsersService } from '../../core/services/users.service';
 import { Modal } from '../../shared/modal/modal.component';
 import { AuthService } from '../../core/services/auth.service';
 import { HoverHighlightDirective } from '../../shared/directives/hover-highlight.directive';
+import { TooltipDirective } from '../../shared/directives/tooltip.directive';
 
 
 @Component({
   selector: 'app-dashboard-users',
   standalone: true,
-  imports: [CommonModule, FormsModule, Modal, HoverHighlightDirective],
+  imports: [CommonModule, FormsModule, Modal, HoverHighlightDirective, TooltipDirective],
   templateUrl: 'dashboard-users.html',
   styleUrl: 'dashboard-users.css'
 })

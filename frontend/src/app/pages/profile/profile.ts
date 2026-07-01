@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
 import { PostsService } from '../../core/services/posts.service';
 import { PostCard } from '../../shared/post-card/post-card';
+import { TooltipDirective } from '../../shared/directives/tooltip.directive';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, PostCard],
+  imports: [CommonModule, PostCard, TooltipDirective],
   templateUrl: 'profile.html',
   styleUrl: 'profile.css'
 })
