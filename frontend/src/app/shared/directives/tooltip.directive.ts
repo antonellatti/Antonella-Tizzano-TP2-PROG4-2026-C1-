@@ -13,8 +13,8 @@ export class TooltipDirective {
     this.renderer.appendChild(document.body, this.tooltipEl);
     this.renderer.setProperty(this.tooltipEl, 'innerText', this.appTooltip);
     this.renderer.setStyle(this.tooltipEl, 'position', 'fixed');
-    this.renderer.setStyle(this.tooltipEl, 'background', '#1a1a2e');
-    this.renderer.setStyle(this.tooltipEl, 'color', 'white');
+    this.renderer.setStyle(this.tooltipEl, 'background', '#dcdcdc50');
+    this.renderer.setStyle(this.tooltipEl, 'color', '#696969');
     this.renderer.setStyle(this.tooltipEl, 'padding', '0.4rem 0.8rem');
     this.renderer.setStyle(this.tooltipEl, 'border-radius', '8px');
     this.renderer.setStyle(this.tooltipEl, 'font-size', '0.8rem');
@@ -22,7 +22,8 @@ export class TooltipDirective {
     this.renderer.setStyle(this.tooltipEl, 'pointer-events', 'none');
 
     const rect = this.el.nativeElement.getBoundingClientRect();
-    this.renderer.setStyle(this.tooltipEl, 'top', `${rect.top - 36}px`);
+    const top = rect.top - 36;
+    this.renderer.setStyle(this.tooltipEl, 'top', `${top < 10 ? rect.bottom + 8 : top}px`);
     this.renderer.setStyle(this.tooltipEl, 'left', `${rect.left}px`);
   }
 
