@@ -61,4 +61,9 @@ export class SessionService {
     localStorage.removeItem('user');
     this.router.navigate(['/login']);
   }
+
+  isActive(): boolean {
+    return !!this.warningTimer || !!this.expireTimer;
+  }
+  
 }

@@ -1,8 +1,19 @@
 <div class="detail-wrapper">
-  <nav class="navbar">
+  <nav class="navbar">    
     <span class="nav-brand"><i class="bi bi-bluesky"></i> Antigram</span>
     <div class="nav-links">
+
       <a (click)="router.navigate(['/posts'])"><i class="bi bi-arrow-left-circle"></i></a>
+      
+      @if (auth.getUser()?.rol === 'administrador') {
+        <a (click)="router.navigate(['/dashboard/usuarios'])">
+          <i class="bi bi-people"></i>
+        </a>
+        <a (click)="router.navigate(['/dashboard/stats'])">
+          <i class="bi bi-bar-chart"></i>
+        </a>
+      }
+      
       <a (click)="router.navigate(['/profile'])"><i class="bi bi-person-heart"></i></a>
       <button (click)="auth.logout()"><i class="bi bi-escape"></i></button>
     </div>
@@ -38,14 +49,15 @@
         <div class="post-likes">
           <button class="btn-like" [class.liked]="yaLiked" (click)="toggleLike()">
             <i class="bi" [class.bi-heart-fill]="yaLiked" [class.bi-heart]="!yaLiked"></i>
-            {{ post.likes?.length || 0 }}
+            {{ (post.likes?.length || 0) | likesCount }}
           </button>
         </div>
       </div>
 
       <!-- Comentarios -->
       <div class="comments-section">
-        <h3><i class="bi bi-chat-heart"></i> ({{ total }})</h3>
+        <h3><i class="bi bi-chat-heart"></i> {{ total | pluralize:'comentario':'comentarios' }}</h3>
+
 
         <!-- Nuevo comentario -->
         <div class="nuevo-comentario">
@@ -79,10 +91,16 @@
                   }
                 </div>
               </div>
-              @if (esAutorComentario(comment)) {
-                <button class="btn-editar" (click)="iniciarEdicion(comment)">
-                  <i class="bi bi-pencil"></i>
-                </button>
+
+              @if (esAutorComentario(comment) || auth.getUser()?.rol === 'administrador') {
+                <div class="comment-mgmt">
+                  <button class="btn-editar" (click)="iniciarEdicion(comment)">
+                    <i class="bi bi-pencil"></i>
+                  </button>
+                  <button class="btn-eliminar-comment" (click)="eliminarComentario(comment)">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
               }
             </div>
 

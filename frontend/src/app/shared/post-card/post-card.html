@@ -26,13 +26,19 @@
     </a>
     <button class="btn-like" [class.liked]="yaLiked" (click)="toggleLike()">
       <i class="bi" [class.bi-heart-fill]="yaLiked" [class.bi-heart]="!yaLiked"></i>
-      {{ post.likes?.length || 0 }}
+      {{ (post.likes?.length || 0) | likesCount }}
     </button>
 
-    @if (esAutor) {
+    <!-- Fecha relativa -->
+    <span class="post-fecha">{{ post.createdAt | timeago }}</span>
+
+    @if (esAutor || esAdmin) {
       <button class="btn-delete" (click)="eliminar()">
-        <i class="bi bi-trash3"></i>
+        <i class="bi bi-trash"></i>
       </button>
     }
+
+
+
   </div>
 </div>

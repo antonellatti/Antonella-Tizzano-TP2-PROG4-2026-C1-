@@ -44,7 +44,7 @@
       <div class="form-row">
         <div class="field-group">
           <label>Contraseña</label>
-          <input type="password" formControlName="password" placeholder="Mín. 8 caracteres" />
+          <input type="password" formControlName="password" placeholder="Mín. 8 caracteres" formControlName="password" appPasswordToggle />
           @if (form.get('password')?.invalid && form.get('password')?.touched) {
             <span class="field-error">Mín. 8 caracteres, 1 mayúscula y 1 número</span>
           }

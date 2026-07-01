@@ -25,17 +25,19 @@ export class App implements OnInit {
     this.router.events.pipe(
       filter(e => e instanceof NavigationEnd)
     ).subscribe((e: any) => {
-      const rutasProtegidas = ['/posts', '/profile', '/post-detail'];
+      const rutasProtegidas = ['/posts', '/profile', '/dashboard'];
       const estaEnRutaProtegida = rutasProtegidas.some(r => e.urlAfterRedirects.startsWith(r));
-
-      if (estaEnRutaProtegida && this.auth.isLoggedIn()) {
+      const contadorActivo = this.sessionService.isActive();
+  
+      if (estaEnRutaProtegida && this.auth.isLoggedIn() && !contadorActivo) {
         this.sessionService.iniciarContador(
           () => { this.sessionModalVisible = true; this.cdr.detectChanges(); },
           (extender) => { this.sessionService.responderModal(extender); this.sessionModalVisible = false; }
         );
-      } else {
+      } else if (!estaEnRutaProtegida) {
         this.sessionService.limpiarContadores();
       }
     });
   }
+  
 }

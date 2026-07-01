@@ -38,4 +38,15 @@ export class CommentsService {
     await comment.save();
     return comment.populate('autor', '-password');
   }
+
+  async delete(commentId: string, userId: string, userRol: string) {
+    const comment = await this.commentModel.findById(commentId);
+    if (!comment) throw new NotFoundException('Comentario no encontrado');
+    const esAutor = comment.autor.toString() === userId;
+    const esAdmin = userRol === 'administrador';
+    if (!esAutor && !esAdmin) throw new ForbiddenException('No podés eliminar este comentario');
+    await this.commentModel.findByIdAndDelete(commentId);
+    return { message: 'Comentario eliminado' };
+  }
+  
 }

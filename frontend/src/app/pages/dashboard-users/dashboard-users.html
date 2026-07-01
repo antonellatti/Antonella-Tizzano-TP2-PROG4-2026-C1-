@@ -1,0 +1,103 @@
+<div class="dashboard-wrapper">
+  <nav class="navbar">
+    <span class="nav-brand"><i class="bi bi-bluesky"></i> Antigram</span>
+    <div class="nav-links">
+
+      @if (auth.getUser()?.rol === 'administrador') {
+        <a (click)="router.navigate(['/dashboard/usuarios'])">
+          <i class="bi bi-people"></i>
+        </a>
+        <a (click)="router.navigate(['/dashboard/stats'])">
+          <i class="bi bi-bar-chart"></i>
+        </a>
+      }
+
+      <a (click)="router.navigate(['/posts'])"><i class="bi bi-house-heart"></i></a>
+      <button (click)="auth.logout()"><i class="bi bi-escape"></i></button>
+    </div>
+  </nav>
+
+  <div class="dashboard-container">
+
+    <div class="dashboard-header">
+      <span>{{ usuarios.length }} Usuarios registrados</span>
+      <h2>Panel de usuarios</h2>
+      <button class="btn-nuevo" (click)="mostrarForm = !mostrarForm">
+        <i class="bi" [class.bi-plus-circle]="!mostrarForm" [class.bi-x-circle]="mostrarForm"></i>
+        {{ mostrarForm ? 'Cancelar' : 'Nuevo usuario' }}
+      </button>
+    </div>
+
+    @if (mostrarForm) {
+      <div class="form-card">
+        <h3>Crear nuevo usuario</h3>
+        <div class="form-row">
+          <input type="text" [(ngModel)]="nuevoUsuario.nombre" placeholder="Nombre" class="input-field" />
+          <input type="text" [(ngModel)]="nuevoUsuario.apellido" placeholder="Apellido" class="input-field" />
+        </div>
+        <input type="email" [(ngModel)]="nuevoUsuario.email" placeholder="Email" class="input-field" />
+        <input type="text" [(ngModel)]="nuevoUsuario.username" placeholder="Nombre de usuario" class="input-field" />
+        <input type="password" [(ngModel)]="nuevoUsuario.password" placeholder="Contraseña" class="input-field" />
+        <input type="date" [(ngModel)]="nuevoUsuario.fechaNacimiento" class="input-field" />
+        <textarea [(ngModel)]="nuevoUsuario.descripcion" placeholder="Descripción breve" rows="2" class="input-field"></textarea>
+
+        <div class="radio-group">
+          <label>
+            <input type="radio" name="rol" value="usuario" [(ngModel)]="nuevoUsuario.rol" />
+            Usuario
+          </label>
+          <label>
+            <input type="radio" name="rol" value="administrador" [(ngModel)]="nuevoUsuario.rol" />
+            Administrador
+          </label>
+        </div>
+
+        <label class="file-upload">
+          <i class="bi bi-cloud-upload"></i> {{ profileFileName || 'Foto de perfil (opcional)' }}
+          <input type="file" accept="image/*" (change)="onFileChange($event)" hidden />
+        </label>
+
+        <button class="btn-crear" (click)="crearUsuario()" [disabled]="creando">
+          @if (creando) { <span class="spinner"></span> } @else { Crear usuario }
+        </button>
+      </div>
+    }
+
+    @if (loading) {
+      <div class="loading"><span class="spinner-dark"></span> Cargando...</div>
+    } @else {
+      <div class="users-table">
+        <div class="table-header">
+          <span>Usuario</span>
+          <span>Email</span>
+          <span>Rol</span>
+          <span>Estado</span>
+          <span>Acción</span>
+        </div>
+        @for (usuario of usuarios; track usuario._id) {
+          <div class="table-row" appHoverHighlight [appHoverHighlight]="'rgba(0,0,0,0.1)'" [class.inactivo]="!usuario.activo">
+            <div class="user-info">
+              @if (usuario.fotoPerfil) {
+                <img [src]="usuario.fotoPerfil" class="user-avatar" />
+              } @else {
+                <div class="user-avatar-placeholder"><i class="bi bi-person-fill"></i></div>
+              }
+              <span>{{ usuario.nombre }} {{ usuario.apellido }} (&#64;{{ usuario.username }})</span>
+            </div>
+            <span>{{ usuario.email }}</span>
+            <span class="rol-badge" [class.admin]="usuario.rol === 'administrador'">{{ usuario.rol }}</span>
+            <span class="estado-badge" [class.activo]="usuario.activo" [class.inactivo-badge]="!usuario.activo">
+              {{ usuario.activo ? 'Activo' : 'Deshabilitado' }}
+            </span>
+            <button class="btn-toggle" [class.habilitar]="!usuario.activo" (click)="toggleEstado(usuario)">
+              {{ usuario.activo ? 'Deshabilitar' : 'Habilitar' }}
+            </button>
+          </div>
+        }
+      </div>
+    }
+
+  </div>
+</div>
+
+<app-modal [visible]="modal.visible" [message]="modal.message" [type]="modal.type" />

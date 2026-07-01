@@ -48,5 +48,26 @@ export class PostsService {
   updateComment(postId: string, commentId: string, mensaje: string) {
     return this.http.put<any>(`${this.apiUrl}/posts/${postId}/comments/${commentId}`, { mensaje });
   }
+
+  deleteComment(postId: string, commentId: string) {
+    return this.http.delete<any>(`${this.apiUrl}/posts/${postId}/comments/${commentId}`);
+  }
   
+  getStatPostsPorUsuario(desde?: string, hasta?: string) {
+    let url = `${this.apiUrl}/stats/posts-por-usuario`;
+    if (desde || hasta) url += `?desde=${desde || ''}&hasta=${hasta || ''}`;
+    return this.http.get<any[]>(url);
+  }
+  
+  getStatComentariosPorFecha(desde?: string, hasta?: string) {
+    let url = `${this.apiUrl}/stats/comentarios-por-fecha`;
+    if (desde || hasta) url += `?desde=${desde || ''}&hasta=${hasta || ''}`;
+    return this.http.get<any[]>(url);
+  }
+  
+  getStatComentariosPorPost(desde?: string, hasta?: string) {
+    let url = `${this.apiUrl}/stats/comentarios-por-post`;
+    if (desde || hasta) url += `?desde=${desde || ''}&hasta=${hasta || ''}`;
+    return this.http.get<any[]>(url);
+  }
 }

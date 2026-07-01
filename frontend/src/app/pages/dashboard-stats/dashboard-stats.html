@@ -1,0 +1,55 @@
+<div class="stats-wrapper">
+  <nav class="navbar">
+    <span class="nav-brand"><i class="bi bi-bluesky"></i> Antigram</span>
+    <div class="nav-links">
+      @if (auth.getUser()?.rol === 'administrador') {
+        <a (click)="router.navigate(['/dashboard/usuarios'])">
+          <i class="bi bi-people"></i>
+        </a>
+        <a (click)="router.navigate(['/dashboard/stats'])">
+          <i class="bi bi-bar-chart"></i>
+        </a>
+      }
+      <a (click)="router.navigate(['/posts'])"><i class="bi bi-house-heart"></i></a>
+      <button (click)="auth.logout()"><i class="bi bi-escape"></i></button>
+    </div>
+  </nav>
+
+  <div class="stats-container">
+
+    <!-- Filtro de fechas -->
+    <div class="filtros-card" appHoverHighlight [appHoverHighlight]="'rgba(0,0,0,0.1)'" >
+      <h3><i class="bi bi-funnel"></i> Filtrar por período</h3>
+      <div class="filtros-row">
+        <div class="filtro-group">
+          <label>Desde</label>
+          <input type="date" [(ngModel)]="desde" class="input-field" />
+        </div>
+        <div class="filtro-group">
+          <label>Hasta</label>
+          <input type="date" [(ngModel)]="hasta" class="input-field" />
+        </div>
+        <button class="btn-filtrar" (click)="cargarTodo()">
+          <i class="bi bi-search"></i> Buscar
+        </button>
+        <button class="btn-limpiar" (click)="desde = ''; hasta = ''; cargarTodo()">
+          <i class="bi bi-x-circle"></i> Limpiar
+        </button>
+      </div>
+    </div>
+
+    <!-- Gráficos -->
+    <div class="charts-grid">
+      <div class="chart-card" appHoverHighlight [appHoverHighlight]="'rgba(0,0,0,0.1)'" >
+        <canvas id="chartPostsUsuario"></canvas>
+      </div>
+      <div class="chart-card" appHoverHighlight [appHoverHighlight]="'rgba(0,0,0,0.1)'" >
+        <canvas id="chartComentariosFecha"></canvas>
+      </div>
+      <div class="chart-card chart-wide" appHoverHighlight [appHoverHighlight]="'rgba(0,0,0,0.1)'" >
+        <canvas id="chartComentariosPost"></canvas>
+      </div>
+    </div>
+
+  </div>
+</div>

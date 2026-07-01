@@ -2,6 +2,14 @@
   <nav class="navbar">
     <span class="nav-brand"><i class="bi bi-bluesky"></i> Antigram</span>
     <div class="nav-links">
+      @if (auth.getUser()?.rol === 'administrador') {
+        <a (click)="router.navigate(['/dashboard/usuarios'])">
+          <i class="bi bi-people"></i>
+        </a>
+        <a (click)="router.navigate(['/dashboard/stats'])">
+          <i class="bi bi-bar-chart"></i>
+        </a>
+      }
       <a (click)="router.navigate(['/posts'])"><i class="bi bi-house-heart"></i></a>
       <button (click)="auth.logout()"><i class="bi bi-escape"></i></button>
     </div>
@@ -35,6 +43,17 @@
       } @else {
         @for (post of misPosts; track post._id) {
           <app-post-card [post]="post" (deleted)="onDeleted($event)" (liked)="onLiked($event)" />
+        }
+        @if (total > limit) {
+          <div class="paginacion">
+            <button (click)="paginaAnterior()" [disabled]="offset === 0">
+              <i class="bi bi-chevron-left"></i>
+            </button>
+            <span>{{ paginaActual }} / {{ totalPaginas }}</span>
+            <button (click)="paginaSiguiente()" [disabled]="offset + limit >= total">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </div>
         }
       }
     </div>

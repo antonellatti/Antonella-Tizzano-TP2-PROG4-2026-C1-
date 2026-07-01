@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Body, Param, Query, UseGuards, Request, HttpCode } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, Query, UseGuards, Request, HttpCode } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { CommentsService } from './comments.service';
 import { CreateCommentDto, UpdateCommentDto } from './dto/comment.dto';
@@ -35,4 +35,11 @@ export class CommentsController {
   ) {
     return this.commentsService.update(commentId, req.user.userId, dto);
   }
+
+  @Delete(':commentId')
+@HttpCode(200)
+delete(@Param('commentId') commentId: string, @Request() req: any) {
+  return this.commentsService.delete(commentId, req.user.userId, req.user.rol);
+}
+
 }

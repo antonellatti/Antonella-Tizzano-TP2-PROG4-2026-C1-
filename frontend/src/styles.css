@@ -108,7 +108,10 @@ html, body {
 .empty { text-align: center; color: #aaa; padding: 2rem; }
 
 
-
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 

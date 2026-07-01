@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { PostsService } from '../../core/services/posts.service';
+import { PluralizePipe } from '../../shared/pipes/pluralize.pipe';
+import { LikesCountPipe } from '../../shared/pipes/likes-count.pipe';
 
 @Component({
   selector: 'app-post-detail',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, PluralizePipe, LikesCountPipe],
   templateUrl: 'post-detail.html',
   styleUrl: 'post-detail.css'
 })
@@ -106,6 +108,16 @@ export class PostDetail implements OnInit {
         const idx = this.comments.findIndex(c => c._id === comment._id);
         if (idx !== -1) this.comments[idx] = updated;
         this.editingCommentId = null;
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  eliminarComentario(comment: any) {
+    this.postsService.deleteComment(this.post._id, comment._id).subscribe({
+      next: () => {
+        this.comments = this.comments.filter(c => c._id !== comment._id);
+        this.total--;
         this.cdr.detectChanges();
       }
     });

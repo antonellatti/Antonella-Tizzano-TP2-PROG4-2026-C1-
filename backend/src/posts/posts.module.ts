@@ -6,6 +6,8 @@ import { Post, PostSchema } from './schemas/post.schema';
 import { CommentsController } from './comments.controller';
 import { CommentsService } from './comments.service';
 import { Comment, CommentSchema } from './schemas/comment.schema';
+import { StatsController } from './stats.controller';
+import { StatsService } from './stats.service';
 
 @Module({
   imports: [
@@ -14,7 +16,7 @@ import { Comment, CommentSchema } from './schemas/comment.schema';
       { name: Comment.name, schema: CommentSchema },
     ]),
   ],
-  controllers: [PostsController, CommentsController],
-  providers: [PostsService, CommentsService],
+  controllers: [PostsController, CommentsController, StatsController],
+  providers: [PostsService, CommentsService, StatsService],
 })
 export class PostsModule {}
